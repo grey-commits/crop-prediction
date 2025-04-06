@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-96 text-center">
+        <h2 class="text-2xl font-semibold mb-4">Predicted Crop</h2>
+        
+        <p class="text-lg text-gray-700">Based on your inputs, the recommended crop is:</p>
+        
+        <div class="mt-4 text-3xl font-bold text-green-600">
+            <%= prediction %>
+        </div>
+
+        <a href="/" class="mt-6 inline-block bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
+            Predict Again
+        </a>
+    </div>
+</body>
+</html>
