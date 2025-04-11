@@ -1,18 +1,22 @@
+import os
 import joblib
 import numpy as np
-import pandas as pd  # Import pandas for DataFrame operations
+import pandas as pd
 from flask import Flask, request, jsonify
-from crop_recommendation import predict_probabilities  # Import the function from crop_recommendation.py
 from flask_cors import CORS 
+from crop_recommendation import predict_probabilities
 
 app = Flask(__name__)
 CORS(app, origins=["http://localhost:5173"])
 
-# Load the trained model, scaler, and label encoder
+# Get the absolute directory where server.py is located
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Load the trained model, scaler, and label encoder using relative paths
 try:
-    model = joblib.load("crop_recommendation_model.pkl")
-    scaler = joblib.load("crop_recommendation_scaler.pkl") 
-    label_encoder = joblib.load("crop_recommendation_label_encoder.pkl")
+    model = joblib.load(os.path.join(BASE_DIR, "crop_recommendation_model.pkl"))
+    scaler = joblib.load(os.path.join(BASE_DIR, "crop_recommendation_scaler.pkl"))
+    label_encoder = joblib.load(os.path.join(BASE_DIR, "crop_recommendation_label_encoder.pkl"))
     print("Model, scaler, and label encoder loaded successfully.")
 except FileNotFoundError as e:
     print(f"Error: {e}")
@@ -33,7 +37,7 @@ def predict():
             return jsonify({"error": "Missing 'features' key in request."}), 400
 
         # Convert input to a pandas DataFrame with feature names
-        feature_names = ['N', 'P', 'K', 'temperature', 'humidity', 'ph', 'rainfall'] # Ensure these match your model's input features
+        feature_names = ['N', 'P', 'K', 'temperature', 'humidity', 'ph', 'rainfall']
         input_data = pd.DataFrame([data["features"]], columns=feature_names)
 
         # Scale the input data

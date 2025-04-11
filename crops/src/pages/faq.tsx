@@ -71,29 +71,44 @@ export function FAQ() {
         </p>
       </div>
 
-      <div className="grid md:grid-cols-4 gap-8 ">
+      <div className="grid md:grid-cols-4 gap-8">
+        {/* FAQ Accordion */}
         <div className="md:col-span-3 text-slate-900">
-          <Accordion type="single" collapsible className="space-y-4 px-12">
+          <Accordion
+            type="single"
+            collapsible
+            className="space-y-4 px-12 bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700"
+          >
             {faqs.map((faq, index) => (
-              <AccordionItem key={index} value={`item-${index}`}>
-                <AccordionTrigger className="text-left">
+              <AccordionItem
+                key={index}
+                value={`item-${index}`}
+                className="rounded-lg border border-gray-200 dark:border-gray-700"
+              >
+                <AccordionTrigger className="text-left px-4 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-t-lg">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent>{faq.answer}</AccordionContent>
+                <AccordionContent className="px-4 py-2 bg-gray-50 dark:bg-gray-800 rounded-b-lg">
+                  {faq.answer}
+                </AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
         </div>
 
+        {/* Categories and Support */}
         <div className="space-y-6">
-          <Card className="p-6">
-            <h2 className="font-semibold mb-4">Browse by Category</h2>
-            <div className="space-y-2 text-slate-900">
+          {/* Categories */}
+          <Card className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
+            <h2 className="font-semibold mb-4 text-gray-800 dark:text-gray-100">
+              Browse by Category
+            </h2>
+            <div className="space-y-2">
               {categories.map((category) => (
                 <Button
                   key={category}
                   variant="ghost"
-                  className="w-full justify-start"
+                  className="w-full justify-start bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-100 rounded-md"
                 >
                   {category}
                 </Button>
@@ -101,13 +116,19 @@ export function FAQ() {
             </div>
           </Card>
 
-          <Card className="p-6">
-            <h2 className="font-semibold mb-4">Still Have Questions?</h2>
-            <p className="text-sm text-muted-foreground mb-4">
+          {/* Support */}
+          <Card className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
+            <h2 className="font-semibold mb-4 text-gray-800 dark:text-gray-100">
+              Still Have Questions?
+            </h2>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
               Can't find the answer you're looking for? Reach out to our support
               team.
             </p>
-            <Button asChild className="w-full">
+            <Button
+              asChild
+              className="w-full bg-blue-500 hover:bg-blue-600 text-white rounded-md"
+            >
               <Link to="/contact">Contact Support</Link>
             </Button>
           </Card>

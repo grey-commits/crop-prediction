@@ -1,0 +1,12 @@
+numpy 
+pandas 
+flask 
+joblib 
+matplotlib
+scikit-learn
+scipy
+seaborn
+tensorflow
+tensorflow-hub
+tensorflow-datasets
+flask-cors          
