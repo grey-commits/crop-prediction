@@ -10,3 +10,5 @@ tensorflow
 tensorflow-hub
 tensorflow-datasets
 flask-cors          
+gunicorn
+flask-cors
