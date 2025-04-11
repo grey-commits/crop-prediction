@@ -15,7 +15,7 @@ export function SoilSamplingForm() {
     potassium: "",
     temperature: "",
     humidity: "",
-    ph: "",
+    ph: "", // Added pH field
     rainfall: "",
     soilType: "",
     location: "", // Added location field
@@ -27,7 +27,7 @@ export function SoilSamplingForm() {
     e.preventDefault();
 
     try {
-      const response = await fetch("://127.0.0.1:5000/predict", {
+      const response = await fetch("https://crop-prediction-645c.onrender.com/predict", { // Updated URL for Render backend
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -39,7 +39,7 @@ export function SoilSamplingForm() {
             parseFloat(formData.potassium),
             parseFloat(formData.temperature),
             parseFloat(formData.humidity),
-            parseFloat(formData.ph),
+            parseFloat(formData.ph), // Include pH in the request
             parseFloat(formData.rainfall),
           ],
           soilType: formData.soilType,
@@ -146,6 +146,21 @@ export function SoilSamplingForm() {
               />
             </div>
             <div>
+              <Label htmlFor="ph">pH Level (0.00 - 14.00)</Label> {/* Added pH input */}
+              <Input
+                id="ph"
+                name="ph"
+                type="number"
+                min="0"
+                max="14"
+                step="0.01"
+                value={formData.ph}
+                onChange={handleInputChange}
+                placeholder="Enter pH value"
+                required
+              />
+            </div>
+            <div>
               <Label>Temperature, Humidity, and Rainfall</Label>
               <div className="flex items-center gap-4">
                 <Button
@@ -169,30 +184,6 @@ export function SoilSamplingForm() {
                 </Button>
               </div>
             </div>
-            {useLocation && (
-              <div className="mt-4">
-                <Label htmlFor="location">Location</Label>
-                <div className="flex items-center gap-2">
-                  <Input
-                    id="location"
-                    name="location"
-                    type="text"
-                    value={formData.location}
-                    onChange={handleInputChange}
-                    placeholder="Enter your location"
-                    className="flex-1"
-                  />
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={() => window.open(`https://www.google.com/maps/search/${formData.location}`, "_blank")}
-                    className="flex items-center justify-center p-2"
-                  >
-                    <MapPin className="h-5 w-5" /> {/* Map icon */}
-                  </Button>
-                </div>
-              </div>
-            )}
             {!useLocation && (
               <>
                 <div>
