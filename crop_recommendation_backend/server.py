@@ -7,7 +7,7 @@ from flask_cors import CORS
 from crop_recommendation import predict_probabilities
 
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:5173"])
+CORS(app)  # Allow all origins
 
 # Get the absolute directory where server.py is located
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
